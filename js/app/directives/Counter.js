@@ -9,8 +9,18 @@ function Counter() {
 		].join(''),
 		controller: function ($scope) {
 			$scope.count = 0;
-		}
-	}
+		},
+		link: function (scope, element) {
+        element.on('click', function () {
+           scope.count++;
+					 scope.$apply();
+        });
+
+        scope.$on('$destroy', function () {
+           element.off();
+        });
+    }
+	};
 }
 
 angular
